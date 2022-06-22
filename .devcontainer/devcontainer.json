@@ -1,0 +1,21 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.238.0/containers/r
+{
+	"name": "R UMR1283",
+	"image": "umr1283/umr1283:4.2.0",
+	"mounts": [
+		"source=${localWorkspaceFolder}/app-scripts,target=/usr/local/share/app-scripts,type=bind,consistency=cached"
+	],
+	"customizations": {
+		"vscode": {
+			"settings": { 
+				"r.plot.useHttpgd": true
+			},
+			"extensions": [
+				"reditorsupport.r",
+				"rdebugger.r-debugger"
+			]
+		}
+	},
+	"postCreateCommand": "bash /docker_scripts add_user $USERNAME $(id -g $USERNAME) admin"
+}
