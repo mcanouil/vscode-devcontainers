@@ -1,6 +1,14 @@
 {
 	"name": "R UMR1283",
 	"image": "umr1283/umr1283:4.2.0",
+	"containerEnv": {
+		"RENV_PATHS_CACHE": "/renv_cache"
+	},
+	"onCreateCommand": [
+		"bash /docker_scripts add_user ${localEnv:USER} $(id -g ${localEnv:USER}) admin"
+	],
+	"containerUser": "${localEnv:USER}",
+	"updateRemoteUserUID": false,
 	"mounts": [
 		"source=/Isiprod1/user,target=/home,type=bind,consistency=cached",
 		"source=/Isiprod1,target=/media,type=bind,consistency=cached",
@@ -22,9 +30,5 @@
 				"rdebugger.r-debugger"
 			]
 		}
-	},
-	"onCreateCommand": [
-		"bash /docker_scripts add_user $USERNAME $(id -g $USERNAME) admin",
-		"export RENV_PATHS_CACHE=/renv_cache"
-	]
+	}
 }
