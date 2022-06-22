@@ -5,7 +5,7 @@
 		"RENV_PATHS_CACHE": "/renv_cache"
 	},
 	"onCreateCommand": [
-		"bash /docker_scripts add_user ${localEnv:USER} $(id -g ${localEnv:USER}) admin"
+		"useradd --no-create-home --no-user-group --gid staff --uid ${localEnv:USER} --groups staff $(id -g ${localEnv:USER}) --shell /bin/bash"
 	],
 	"containerUser": "${localEnv:USER}",
 	"updateRemoteUserUID": false,
