@@ -1,14 +1,15 @@
 {
 	"name": "R UMR1283",
-	"image": "umr1283/umr1283:4.2.0",
+	"remoteUser": "${localEnv:USER}",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			"USERNAME": "${localEnv:USER}"
+		}
+	},
 	"containerEnv": {
 		"RENV_PATHS_CACHE": "/renv_cache"
 	},
-	"onCreateCommand": [
-		"useradd --no-create-home --no-user-group --gid staff --uid ${localEnv:USER} --groups staff $(id -g ${localEnv:USER}) --shell /bin/bash"
-	],
-	"containerUser": "${localEnv:USER}",
-	"updateRemoteUserUID": false,
 	"mounts": [
 		"source=/Isiprod1/user,target=/home,type=bind,consistency=cached",
 		"source=/Isiprod1,target=/media,type=bind,consistency=cached",
@@ -22,12 +23,46 @@
 	],
 	"customizations": {
 		"vscode": {
-			"settings": { 
-				"r.plot.useHttpgd": true
+			"settings": {
+				"editor.tabSize": 2,
+				"files.trimFinalNewlines": true,
+				"files.insertFinalNewline": true,
+				"files.watcherExclude": {
+						"**.Rproj": true,
+						"**/.cache/**": true,
+						"**/.local/**": true,
+						"**/.Rproj.user/**": true,
+						"**/.vscode/**": true
+				},
+				"files.exclude": {
+						"**.Rproj": true,
+						"**/.Rproj.user": true
+				},
+				"files.eol": "\n",
+				"r.plot.useHttpgd": true,
+				"r.rterm.option": [
+					"--no-save",
+					"--no-restore-data",
+					"--quiet"
+				],
+				"r.rmarkdown.knit.defaults.knitWorkingDirectory": "workspace root",
+				"r.plot.defaults.fullWindowMode": true,
+				"path-autocomplete.triggerOutsideStrings": true,
+				"path-autocomplete.pathMappings": {
+						"/": "/",
+						"./": "${folder}"
+				},
+				"gitlab.instanceUrl": "http://gitlab.egid.local/"
 			},
 			"extensions": [
 				"reditorsupport.r",
-				"rdebugger.r-debugger"
+				"rdebugger.r-debugger",
+				"quarto.quarto",
+				"gitlab.gitlab-workflow",
+				"usernamehw.errorlens",
+				"eamodio.gitlens",
+				"ms-vscode.live-server",
+				"ionutvmi.path-autocomplete"
 			]
 		}
 	}
