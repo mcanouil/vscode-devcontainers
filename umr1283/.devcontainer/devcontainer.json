@@ -1,15 +1,18 @@
 {
-	"name": "R UMR1283",
+	"name": "UMR1283",
 	"remoteUser": "${localEnv:USER}",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
+			"IMAGE": "docker.io/umr1283/umr1283:4.2.0",
 			"USERNAME": "${localEnv:USER}"
 		}
 	},
 	"containerEnv": {
 		"RENV_PATHS_CACHE": "/renv_cache"
 	},
+	"workspaceMount": "source=${localWorkspaceFolder},target=/disks/PROJECT/${localWorkspaceFolderBasename},type=bind",
+	"workspaceFolder": "/disks/PROJECT/${localWorkspaceFolderBasename}",
 	"mounts": [
 		"source=/Isiprod1/user,target=/home,type=bind,consistency=cached",
 		"source=/Isiprod1,target=/media,type=bind,consistency=cached",
