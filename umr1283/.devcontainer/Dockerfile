@@ -14,4 +14,6 @@ RUN if [[ -d /home/${USERNAME} ]]; then CH="--no-create-home"; else CH="--create
 
 RUN apt-get update && apt-get install -y openssh-client
 
+RUN Rscript -e 'pak::pkg_install(c("languageserver", "httpgd"))'
+
 USER ${USERNAME}
