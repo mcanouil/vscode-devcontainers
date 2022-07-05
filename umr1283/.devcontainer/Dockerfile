@@ -1,4 +1,7 @@
-FROM docker.io/umr1283/umr1283:4.2.0
+ARG IMAGE
+FROM ${IMAGE}
+
+RUN apt-get update && apt-get install -y openssh-client sudo
 
 ARG USERNAME=umr1283
 ARG USERID=1000
@@ -10,9 +13,9 @@ RUN if [[ -d /home/${USERNAME} ]]; then CH="--no-create-home"; else CH="--create
         --uid ${USERID} \
         --gid staff \
         --groups staff \
-        ${USERNAME}
-
-RUN apt-get update && apt-get install -y openssh-client
+        ${USERNAME} \
+    && usermod -aG sudo ${USERNAME} \
+    && echo 'username  ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 RUN Rscript -e 'pak::pkg_install(c("languageserver", "httpgd"))'
 
