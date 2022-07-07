@@ -52,6 +52,10 @@
 				],
 				"r.rmarkdown.knit.defaults.knitWorkingDirectory": "workspace root",
 				"r.plot.defaults.fullWindowMode": true,
+				"r.libPaths": [
+					"/usr/local/lib/R/site-library",
+					"/usr/local/lib/R/library"
+				],
 				"path-autocomplete.triggerOutsideStrings": true,
 				"path-autocomplete.pathMappings": {
 						"/": "/",
