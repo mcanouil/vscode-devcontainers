@@ -1,5 +1,6 @@
 {
 	"name": "UMR1283",
+	"runArgs": ["--name", "${localEnv:USER}--${localWorkspaceFolderBasename}--devcontainer"],
 	"remoteUser": "${localEnv:USER}",
 	"build": {
 		"dockerfile": "Dockerfile",
